@@ -271,6 +271,7 @@ apps. [There is an explanation of WPP in the PayPal Forums](http://www.pdncommun
         PAYPAL_WPP_USER = "???"      # Get from PayPal
         PAYPAL_WPP_PASSWORD = "???"
         PAYPAL_WPP_SIGNATURE = "???"
+        PAYPAL_RECEIVER_EMAIL = "yourpaypalemail@example.com"
 
 1. Run `python manage.py syncdb` to add the required tables.
 
