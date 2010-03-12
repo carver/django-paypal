@@ -289,30 +289,14 @@ apps. [There is an explanation of WPP in the PayPal Forums](http://www.pdncommun
         
           kw = {"item": item,                            # what you're selling
                 "payment_template": "payment.html",      # template name for payment
-                "confirm_template": "confirmation.html", # template name for confirmation
+                "confirm_template": "confirm.html", # template name for confirmation
                 "success_url": "/success/"}              # redirect location after success
                 
           ppp = PayPalPro(**kw)
           return ppp(request)
 
 
-1. Create templates for payment and confirmation. By default both templates are 
-   populated with the context variable `form` which contains either a 
-   `PaymentForm` or a `Confirmation` form.
-
-    <!-- payment.html -->
-    <h1>Show me the money</h1>
-    <form method="post" action="">
-      {{ form }}
-      <input type="submit" value="Pay Up">
-    </form>
-    
-    <!-- confirmation.html -->
-    <h1>Are you sure you want to buy this thing?</h1>
-    <form method="post" action="">
-      {{ form }}
-      <input type="submit" value="Yes I Yams">
-    </form>
+1. Copy templates from paypal/pro/templates/pro into paypal/pro/templates
 
 1. Add your view to `urls.py`, and add the IPN endpoint to receive callbacks 
    from PayPal:
