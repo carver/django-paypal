@@ -1,6 +1,14 @@
 Django PayPal
 =============
 
+How is the "portable" version of django-paypal different?
+-----
+All the files have been moved one directory up, making the root of the project the python module that will be imported by django.
+
+Why?  When using multiple libraries like django-paypal, it is convenient to check them out together into a single folder that has been added to your python path.  The directory structure of this "portable" version of django-paypal enables that.  Without this change, a developer would have to clone this project a level _above_ the shared python path folder. This would cause conflicts with other projects cloned at the same level (.gitignore, etc).
+
+Note: You now _must_ clone this project as 'paypal' 
+
 
 About
 -----
