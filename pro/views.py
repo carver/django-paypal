@@ -139,7 +139,6 @@ class PayPalPro(object):
         if form.is_valid():
             success = form.process(self.request, self.item)
             if success:
-                payment_was_successful.send(sender=self.item)
                 return HttpResponseRedirect(self.success_url)
             else:
                 self.context['errors'] = self.errors['processing']
