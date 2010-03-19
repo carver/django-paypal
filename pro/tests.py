@@ -10,8 +10,7 @@ from django.test.client import Client
 from paypal.pro.fields import CreditCardField
 from paypal.pro.helpers import PayPalWPP, PayPalError
 from paypal.pro.exceptions import PayPalFailure
-from paypal.pro import helpers
-from mock import Mock
+from paypal.pro.signals import payment_was_flagged, payment_was_successful
 
 class RequestFactory(Client):
     # Used to generate request objects.
@@ -56,10 +55,10 @@ class CreditCardFieldTest(TestCase):
         
 class PayPalWPPTest(TestCase):
     def setUp(self):
-        self.signal_pws = helpers.payment_was_successful
-        self.signal_pwf = helpers.payment_was_flagged
-        helpers.payment_was_successful = Mock()
-        helpers.payment_was_flagged = Mock()
+        self.success_receivers = list(payment_was_successful.receivers)
+        self.flag_receivers = list(payment_was_flagged.receivers)
+        payment_was_successful.receivers = []
+        payment_was_flagged.receivers = []
         
         # Avoding blasting real requests at PayPal.
         self.old_debug = settings.DEBUG
@@ -77,8 +76,8 @@ class PayPalWPPTest(TestCase):
         
     def tearDown(self):
         settings.DEBUG = self.old_debug
-        helpers.payment_was_successful = self.signal_pws
-        helpers.payment_was_flagged = self.signal_pwf
+        payment_was_successful.receivers = self.success_receivers
+        payment_was_flagged.receivers = self.flag_receivers
 
     def test_doDirectPayment_missing_params(self):
         data = {'firstname': 'Chewbacca'}
