@@ -258,7 +258,7 @@ Using PayPal Payments Pro (WPP)
 
 WPP is the more awesome version of PayPal that lets you accept payments on your 
 site. WPP reuses code from `paypal.standard` so you'll need to include both 
-apps. [There is an explanation of WPP in the PayPal Forums](http://www.pdncommunity.com/pdn/board/message?board.id=wppro&thread.id=192).
+apps.
 
 
 1. Edit `settings.py` and add  `paypal.standard` and `paypal.pro` to your 
@@ -284,8 +284,8 @@ apps. [There is an explanation of WPP in the PayPal Forums](http://www.pdncommun
           item = {"amt": "10.00",             # amount to charge for item
                   "inv": "inventory",         # unique tracking variable paypal
                   "custom": "tracking",       # custom tracking variable for you
-                  "cancelurl": "http://...",  # Express checkout cancel url
-                  "returnurl": "http://..."}  # Express checkout return url
+                  "cancelurl": "http://example.com/payment-url/",  # Express checkout cancel url
+                  "returnurl": "http://example.com/payment-url/"}  # Express checkout return url
         
           kw = {"item": item,                            # what you're selling
                 "payment_template": "payment.html",      # template name for payment
